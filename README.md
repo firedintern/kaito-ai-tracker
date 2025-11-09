@@ -136,6 +136,6 @@ MIT License - feel free to use this for your own projects!
 
 **NFA - Not Financial Advice!**
 
-This tool is for educational and informational purposes only. Always DYOR (Do Your Own Research).
+This tool is for educational and informational purposes only. Always DYOR.
 
 ---
