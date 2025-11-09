@@ -1,10 +1,10 @@
-# 🤖 Kaito AI Agents Tracker 🚀
+# Kaito AI Agents Tracker
 
 **Post-TGE token performance tracker for Kaito-listed AI agent projects**
 
 Track real-time prices, market caps, and all-time ROI for AI agent tokens with a beautiful degen-themed dashboard.
 
-## ✨ Features
+## Features
 
 - 🎯 **Live Price Tracking** - Real-time data from CoinMarketCap
 - 💎 **All-Time ROI Calculation** - Track performance since TGE
@@ -12,15 +12,15 @@ Track real-time prices, market caps, and all-time ROI for AI agent tokens with a
 - 📊 **Performance Metrics** - 24h, 7d, 30d price changes
 - 🔥 **Easy to Update** - Add new tokens in seconds
 
-## 🎨 Live Demo
+## Live Demo
 
 [View Live Dashboard](#) ← Add your Vercel URL here!
 
-## 📸 Screenshot
+## Screenshot
 
 ![Dashboard Preview](screenshot.png) ← Add a screenshot!
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -73,7 +73,7 @@ Edit `projects_database.json`:
 
 Then run the tracker again!
 
-## 🌐 Deploy to Vercel
+## Deploy to Vercel
 
 ### Option 1: Manual Deploy (Easiest)
 
@@ -101,21 +101,21 @@ kaito-ai-tracker/
 └── dashboard.html              # Generated dashboard
 ```
 
-## 🔒 Security
+## Security
 
 - ✅ API keys are **never** committed to GitHub
 - ✅ `config.py` is in `.gitignore`
 - ✅ Only push template files
 - ✅ Dashboard contains no sensitive data
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Python 3** - Data collection
 - **CoinMarketCap API** - Real-time prices
 - **Vanilla HTML/CSS/JS** - No dependencies!
 - **Vercel** - Hosting (optional)
 
-## 📈 Current Tokens
+## Current Tokens
 
 - **Virtuals Protocol** ($VIRTUAL) - +13,424% ROI 🔥
 - **INFINIT** ($IN) - +82% ROI
@@ -123,7 +123,7 @@ kaito-ai-tracker/
 - **Creator Bid** ($BID)
 - **Wayfinder** ($PROMPT)
 
-## 🤝 Contributing
+## Contributing
 
 Want to add more features? PRs welcome!
 
@@ -132,7 +132,7 @@ Want to add more features? PRs welcome!
 3. Make your changes
 4. Submit a PR
 
-## 📝 License
+## License
 
 MIT License - feel free to use this for your own projects!
 
@@ -143,7 +143,3 @@ MIT License - feel free to use this for your own projects!
 This tool is for educational and informational purposes only. Always DYOR (Do Your Own Research).
 
 ---
-
-Built with 💎 by degens, for degens
-
-**WAGMI** 🚀 **LFG** 🔥
