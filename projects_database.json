@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Creator Bid",
+    "twitter": "@CreatorBid",
+    "token_symbol": "BID",
+    "tge_date": "2025-01-23",
+    "tge_price": 0.2862,
+    "category": "AI Agents"
+  },
+  {
+    "name": "INFINIT",
+    "twitter": "@Infinit_Labs",
+    "token_symbol": "IN",
+    "tge_date": "2025-08-07",
+    "tge_price": 0.05352,
+    "category": "AI Agents"
+  },
+  {
+    "name": "Newton",
+    "twitter": "@MagicNewton",
+    "token_symbol": "NEWT",
+    "tge_date": "2025-06-24",
+    "tge_price": 0.5117,
+    "category": "AI Agents"
+  },
+  {
+    "name": "Virtuals Protocol",
+    "twitter": "@virtuals_io",
+    "token_symbol": "VIRTUAL",
+    "tge_date": "2023-12-24",
+    "tge_price": 0.01002,
+    "category": "AI Agents"
+  },
+  {
+    "name": "Wayfinder",
+    "twitter": "@AIWayfinder",
+    "token_symbol": "PROMPT",
+    "tge_date": "2025-04-10",
+    "tge_price": 0.2333,
+    "category": "AI Agents"
+  }
+]

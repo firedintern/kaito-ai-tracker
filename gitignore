@@ -1,0 +1,24 @@
+# API Keys and Secrets
+.env
+config.py
+*_api_key.txt
+
+# Generated files
+tracker_results_*.json
+dashboard.html
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup files
+*-backup/
+*.bak
