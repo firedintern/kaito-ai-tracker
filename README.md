@@ -14,11 +14,7 @@ Track real-time prices, market caps, and all-time ROI for AI agent tokens with a
 
 ## Live Demo
 
-[View Live Dashboard](#) ← Add your Vercel URL here!
-
-## Screenshot
-
-![Dashboard Preview](screenshot.png) ← Add a screenshot!
+https://kaito-ai-tracker.vercel.app/
 
 ## Quick Start
 
