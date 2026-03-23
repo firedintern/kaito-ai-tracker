@@ -1,4 +1,4 @@
-# Kaito AI Agents Tracker
+# Kaito AI Agents Tracker [Update 2026: Kaito platform has been deprecated]
 
 **Post-TGE token performance tracker for Kaito-listed AI agent projects**
 
