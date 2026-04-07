@@ -5,7 +5,6 @@ config.py
 
 # Generated files
 tracker_results_*.json
-dashboard.html
 
 # Python
 __pycache__/
