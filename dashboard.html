@@ -5,353 +5,610 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaito AI Agents Tracker</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
-        
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        /* ── Typography ── */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+        :root {
+            /* Primary */
+            --near-black:    #141413;
+            --terracotta:    #c96442;
+            --coral:         #d97757;
+
+            /* Surfaces */
+            --parchment:     #f5f4ed;
+            --ivory:         #faf9f5;
+            --pure-white:    #ffffff;
+            --warm-sand:     #e8e6dc;
+            --dark-surface:  #30302e;
+            --deep-dark:     #141413;
+
+            /* Neutrals */
+            --charcoal-warm: #4d4c48;
+            --olive-gray:    #5e5d59;
+            --stone-gray:    #87867f;
+            --dark-warm:     #3d3d3a;
+            --warm-silver:   #b0aea5;
+
+            /* Borders */
+            --border-cream:  #f0eee6;
+            --border-warm:   #e8e6dc;
+            --border-dark:   #30302e;
+            --ring-warm:     #d1cfc5;
+            --ring-deep:     #c2c0b6;
+
+            /* Error */
+            --error:         #b53333;
+            --focus-blue:    #3898ec;
+
+            /* Typography */
+            --font-serif:    Georgia, 'Times New Roman', serif;
+            --font-sans:     Inter, 'system-ui', Arial, sans-serif;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
         body {
-            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 40px 20px;
+            font-family: var(--font-sans);
+            background-color: var(--parchment);
+            color: var(--near-black);
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
+            line-height: 1.60;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
+
+        /* ── Nav ── */
+        .nav {
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 127, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+            z-index: 100;
+            background-color: var(--parchment);
+            border-bottom: 1px solid var(--border-cream);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
         }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-            animation: fadeInDown 0.6s ease;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .header .subtitle {
-            font-size: 1.1em;
-            opacity: 0.8;
-            color: #9ca3af;
-            letter-spacing: 1px;
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.06rem;
             font-weight: 500;
+            color: var(--near-black);
+            letter-spacing: 0;
+            text-decoration: none;
         }
-        
+
+        .nav-meta {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            color: var(--stone-gray);
+            line-height: 1.43;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ── Hero Section (light) ── */
+        .hero {
+            padding: 96px 0 80px;
+            text-align: center;
+        }
+
+        .hero-overline {
+            font-family: var(--font-sans);
+            font-size: 0.63rem;
+            font-weight: 400;
+            color: var(--stone-gray);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            line-height: 1.60;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 1.10;
+            color: var(--near-black);
+            margin-bottom: 24px;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.60;
+            color: var(--olive-gray);
+            max-width: 540px;
+            margin: 0 auto 40px;
+        }
+
+        /* ── Stats Section (dark) ── */
+        .stats-section {
+            background-color: var(--deep-dark);
+            padding: 80px 0;
+        }
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-            animation: fadeInUp 0.6s ease 0.2s both;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1px;
+            background-color: var(--border-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            overflow: hidden;
         }
-        
+
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 20px;
-            padding: 30px;
+            background-color: var(--deep-dark);
+            padding: 40px 32px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
         }
-        
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.2);
-        }
-        
+
         .stat-value {
-            font-size: 2.5em;
-            font-weight: 700;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.10;
+            color: var(--ivory);
             margin-bottom: 10px;
         }
-        
+
+        .stat-value.accent {
+            color: var(--coral);
+        }
+
         .stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.12px;
+            color: var(--warm-silver);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+            line-height: 1.60;
         }
-        
-        .table-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            overflow-x: auto;
-            animation: fadeInUp 0.6s ease 0.4s both;
+
+        /* ── Table Section (light) ── */
+        .table-section {
+            background-color: var(--parchment);
+            padding: 80px 0 96px;
         }
-        
+
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1.20;
+            color: var(--near-black);
+            margin-bottom: 32px;
+        }
+
+        .table-wrapper {
+            background-color: var(--ivory);
+            border: 1px solid var(--border-cream);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: rgba(0,0,0,0.05) 0px 4px 24px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            font-family: var(--font-sans);
         }
-        
+
         thead {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
-            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            background-color: var(--warm-sand);
+            border-bottom: 1px solid var(--border-warm);
         }
-        
+
         th {
-            padding: 20px 15px;
+            padding: 16px 20px;
             text-align: left;
-            font-weight: 700;
-            font-size: 0.9em;
-            color: #60a5fa;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--olive-gray);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.12px;
+            line-height: 1.60;
+            white-space: nowrap;
         }
-        
+
         td {
-            padding: 20px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-cream);
+            font-size: 0.94rem;
+            line-height: 1.60;
+            color: var(--near-black);
+            vertical-align: middle;
         }
-        
-        tbody tr {
-            transition: all 0.2s ease;
+
+        tbody tr:last-child td {
+            border-bottom: none;
         }
-        
+
         tbody tr:hover {
-            background: rgba(59, 130, 246, 0.1);
-            transform: scale(1.01);
+            background-color: var(--warm-sand);
         }
-        
-        .moon {
-            color: #10b981;
-            font-weight: 700;
+
+        /* ── Project cell ── */
+        .project-name {
+            font-family: var(--font-sans);
+            font-size: 0.94rem;
+            font-weight: 500;
+            color: var(--near-black);
+            line-height: 1.25;
+            display: block;
         }
-        
-        .rekt {
-            color: #ef4444;
-            font-weight: 700;
+
+        .project-handle {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--stone-gray);
+            line-height: 1.43;
+            margin-top: 2px;
+            display: block;
         }
-        
-        .token {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 700;
+
+        /* ── Token badge ── */
+        .token-badge {
             display: inline-block;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+            background-color: var(--warm-sand);
+            color: var(--charcoal-warm);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            box-shadow: var(--warm-sand) 0px 0px 0px 0px, var(--ring-warm) 0px 0px 0px 1px;
+            letter-spacing: 0.12px;
+            white-space: nowrap;
         }
-        
-        .footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 40px;
-            font-size: 0.9em;
-            animation: fadeIn 0.6s ease 0.6s both;
+
+        /* ── Change values ── */
+        .positive {
+            color: #3a7d55;
+            font-weight: 500;
         }
-        
-        .footer p {
-            margin: 5px 0;
+
+        .negative {
+            color: var(--error);
+            font-weight: 500;
         }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .price-value {
+            font-weight: 500;
+            color: var(--charcoal-warm);
         }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        .marketcap-value {
+            color: var(--olive-gray);
         }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+
+        .days-value {
+            color: var(--stone-gray);
+            font-size: 0.88rem;
         }
-        
+
+        /* ── Footer (dark) ── */
+        .footer-section {
+            background-color: var(--deep-dark);
+            padding: 48px 0;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-family: var(--font-serif);
+            font-size: 1.06rem;
+            font-weight: 500;
+            color: var(--ivory);
+        }
+
+        .footer-meta {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            color: var(--warm-silver);
+            line-height: 1.60;
+        }
+
+        .footer-meta p + p {
+            margin-top: 4px;
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
+            .nav {
+                padding: 0 20px;
             }
-            
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 64px 0 56px;
+            }
+
+            .hero-title {
+                font-size: 2.3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stats-section {
+                padding: 56px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-card {
+                padding: 28px 20px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .table-section {
+                padding: 56px 0 64px;
+            }
+
+            th, td {
+                padding: 14px 12px;
+                font-size: 0.85rem;
+            }
+
+            .token-badge {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
-            table {
-                font-size: 0.85em;
-            }
-            
-            th, td {
-                padding: 12px 8px;
+
+            .hero-title {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Kaito AI Agents Tracker</h1>
-            <div class="subtitle">Post-TGE Performance</div>
-        </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-value">5</div>
-                <div class="stat-label">Projects Tracked</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">$1.03B</div>
-                <div class="stat-label">Total Market Cap</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">🔥💎🚀 +14050.8%</div>
-                <div class="stat-label">Best All-Time ROI</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">284d</div>
-                <div class="stat-label">Avg Days Since TGE</div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Kaito AI Agents Tracker</a>
+        <span class="nav-meta">Post-TGE Performance</span>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <p class="hero-overline">AI Agents · Crypto · TGE Performance</p>
+            <h1 class="hero-title">Kaito AI Agents Tracker</h1>
+            <p class="hero-subtitle">Monitor post-TGE performance across Kaito-curated AI agent projects — price, market cap, and ROI from launch.</p>
+        </div>
+    </section>
+
+    <!-- Stats (dark section) -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" data-count="5" data-suffix="">5</div>
+                    <div class="stat-label">Projects Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-count="1.03" data-prefix="$" data-suffix="B">$1.03B</div>
+                    <div class="stat-label">Total Market Cap</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value accent" data-count="14050.8" data-prefix="+" data-suffix="%">+14050.8%</div>
+                    <div class="stat-label">Best All-Time ROI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-count="284" data-suffix="d">284d</div>
+                    <div class="stat-label">Avg Days Since TGE</div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Project</th>
-                        <th>Token</th>
-                        <th>Price</th>
-                        <th>Market Cap</th>
-                        <th>All-Time ROI</th>
-                        <th>24h Change</th>
-                        <th>7d Change</th>
-                        <th>30d Change</th>
-                        <th>Days Since TGE</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <!-- Table (light section) -->
+    <section class="table-section">
+        <div class="container">
+            <h2 class="section-heading">All Projects</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Token</th>
+                            <th>Price</th>
+                            <th>Market Cap</th>
+                            <th>All-Time ROI</th>
+                            <th>24h</th>
+                            <th>7d</th>
+                            <th>30d</th>
+                            <th>Days Since TGE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <tr>
-                        <td><strong>Creator Bid</strong><br><small style="color:#1da1f2">@CreatorBid</small></td>
-                        <td><span class="token">$BID</span></td>
-                        <td>$0.0515</td>
-                        <td>$13.97M</td>
-                        <td class="rekt">-82.01%</td>
-                        <td class="moon">+0.15%</td>
-                        <td class="rekt">-17.42%</td>
-                        <td class="moon">+251.40%</td>
-                        <td>290 days</td>
-                    </tr>
-        
-                    <tr>
-                        <td><strong>INFINIT</strong><br><small style="color:#1da1f2">@Infinit_Labs</small></td>
-                        <td><span class="token">$IN</span></td>
-                        <td>$0.0992</td>
-                        <td>$26.67M</td>
-                        <td class="moon">+85.31%</td>
-                        <td class="moon">+1.40%</td>
-                        <td class="rekt">-10.21%</td>
-                        <td class="rekt">-51.95%</td>
-                        <td>94 days</td>
-                    </tr>
-        
-                    <tr>
-                        <td><strong>Newton</strong><br><small style="color:#1da1f2">@MagicNewton</small></td>
-                        <td><span class="token">$NEWT</span></td>
-                        <td>$0.1354</td>
-                        <td>$29.11M</td>
-                        <td class="rekt">-73.54%</td>
-                        <td class="moon">+3.60%</td>
-                        <td class="rekt">-0.87%</td>
-                        <td class="moon">+21.23%</td>
-                        <td>138 days</td>
-                    </tr>
-        
-                    <tr>
-                        <td><strong>Virtuals Protocol</strong><br><small style="color:#1da1f2">@virtuals_io</small></td>
-                        <td><span class="token">$VIRTUAL</span></td>
-                        <td>$1.42</td>
-                        <td>$930.27M</td>
-                        <td class="moon">🔥 +14050.84%</td>
-                        <td class="moon">+4.42%</td>
-                        <td class="rekt">-14.26%</td>
-                        <td class="moon">+157.69%</td>
-                        <td>686 days</td>
-                    </tr>
-        
-                    <tr>
-                        <td><strong>Wayfinder</strong><br><small style="color:#1da1f2">@AIWayfinder</small></td>
-                        <td><span class="token">$PROMPT</span></td>
-                        <td>$0.0881</td>
-                        <td>$32.22M</td>
-                        <td class="rekt">-62.24%</td>
-                        <td class="rekt">-1.59%</td>
-                        <td class="moon">+18.16%</td>
-                        <td class="moon">+18.53%</td>
-                        <td>213 days</td>
-                    </tr>
-        
-                </tbody>
-            </table>
+                        <tr>
+                            <td>
+                                <span class="project-name">Creator Bid</span>
+                                <span class="project-handle">@CreatorBid</span>
+                            </td>
+                            <td><span class="token-badge">$BID</span></td>
+                            <td class="price-value">$0.0515</td>
+                            <td class="marketcap-value">$13.97M</td>
+                            <td class="negative">−82.01%</td>
+                            <td class="positive">+0.15%</td>
+                            <td class="negative">−17.42%</td>
+                            <td class="positive">+251.40%</td>
+                            <td class="days-value">290 days</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="project-name">INFINIT</span>
+                                <span class="project-handle">@Infinit_Labs</span>
+                            </td>
+                            <td><span class="token-badge">$IN</span></td>
+                            <td class="price-value">$0.0992</td>
+                            <td class="marketcap-value">$26.67M</td>
+                            <td class="positive">+85.31%</td>
+                            <td class="positive">+1.40%</td>
+                            <td class="negative">−10.21%</td>
+                            <td class="negative">−51.95%</td>
+                            <td class="days-value">94 days</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="project-name">Newton</span>
+                                <span class="project-handle">@MagicNewton</span>
+                            </td>
+                            <td><span class="token-badge">$NEWT</span></td>
+                            <td class="price-value">$0.1354</td>
+                            <td class="marketcap-value">$29.11M</td>
+                            <td class="negative">−73.54%</td>
+                            <td class="positive">+3.60%</td>
+                            <td class="negative">−0.87%</td>
+                            <td class="positive">+21.23%</td>
+                            <td class="days-value">138 days</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="project-name">Virtuals Protocol</span>
+                                <span class="project-handle">@virtuals_io</span>
+                            </td>
+                            <td><span class="token-badge">$VIRTUAL</span></td>
+                            <td class="price-value">$1.42</td>
+                            <td class="marketcap-value">$930.27M</td>
+                            <td class="positive">+14050.84%</td>
+                            <td class="positive">+4.42%</td>
+                            <td class="negative">−14.26%</td>
+                            <td class="positive">+157.69%</td>
+                            <td class="days-value">686 days</td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <span class="project-name">Wayfinder</span>
+                                <span class="project-handle">@AIWayfinder</span>
+                            </td>
+                            <td><span class="token-badge">$PROMPT</span></td>
+                            <td class="price-value">$0.0881</td>
+                            <td class="marketcap-value">$32.22M</td>
+                            <td class="negative">−62.24%</td>
+                            <td class="negative">−1.59%</td>
+                            <td class="positive">+18.16%</td>
+                            <td class="positive">+18.53%</td>
+                            <td class="days-value">213 days</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>Data: CoinMarketCap + Manual TGE Prices</p>
-            <p>Last updated: 2025-11-09 21:41:16</p>
+    <!-- Footer (dark) -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-brand">Kaito AI Agents Tracker</span>
+                <div class="footer-meta">
+                    <p>Data: CoinMarketCap + Manual TGE Prices</p>
+                    <p>Last updated: 2025-11-09 21:41:16</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
+
+    <script>
+        function animateCount(el) {
+            const target    = parseFloat(el.dataset.count);
+            const prefix    = el.dataset.prefix || '';
+            const suffix    = el.dataset.suffix || '';
+            const isDecimal = target % 1 !== 0;
+            const duration  = 1600; // ms
+            const start     = performance.now();
+
+            function easeOutExpo(t) {
+                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            }
+
+            function tick(now) {
+                const elapsed  = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased    = easeOutExpo(progress);
+                const value    = target * eased;
+
+                el.textContent = prefix + (isDecimal ? value.toFixed(1) : Math.floor(value)) + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(tick);
+                } else {
+                    el.textContent = prefix + (isDecimal ? target.toFixed(1) : target) + suffix;
+                }
+            }
+
+            requestAnimationFrame(tick);
+        }
+
+        // Trigger when the stats section enters the viewport
+        const statsSection = document.querySelector('.stats-section');
+        const counters = statsSection.querySelectorAll('[data-count]');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    counters.forEach(el => animateCount(el));
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(statsSection);
+    </script>
 </body>
 </html>
